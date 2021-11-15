@@ -20,3 +20,32 @@ const increase = (difference) => ({
 const decrease = () => ({
   type: DECREASE,
 });
+
+// set default values
+const initState = {
+  toggle: false,
+  counter: 0,
+};
+
+// reducer get state and action as a params
+function reducer(state = initState, action) {
+  switch (action.type) {
+    case TOGGLE_SWITCH:
+      return {
+        ...state, // keep the immutable
+        toggle: !state.toggle,
+      };
+    case INCREASE:
+      return {
+        ...state,
+        counter: state.counter + action.difference,
+      };
+    case DECREASE:
+      return {
+        ...state,
+        counter: state.counter - 1,
+      };
+    default:
+      return state;
+  }
+}
