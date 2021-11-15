@@ -49,3 +49,37 @@ function reducer(state = initState, action) {
       return state;
   }
 }
+
+// create store
+import { createStore } from "redux";
+
+const store = createStore(reducer);
+
+const render = () => {
+  const state = store.getState(); // get current state
+  // Process toggle
+  if (state.toggle) {
+    divToggle.classList.add("active");
+  } else {
+    divToggle.classList.remove("active");
+  }
+  // process counter
+  counter.innerText = state.counter;
+};
+
+render();
+// subscribe
+store.subscribe(render);
+
+// trigger action
+divToggle.onclick = () => {
+  store.dispatch(toggleSwitch());
+};
+
+btnIncrease.onclick = () => {
+  store.dispatch(increase(1));
+};
+
+btnDecrease.onclick = () => {
+  store.dispatch(decrease());
+};
